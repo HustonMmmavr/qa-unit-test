@@ -1,23 +1,53 @@
-class Calculator {
+module.exports = class Calculator {
     // constructor() {}
 
+    static compute(first, operator, second) {
+        switch (operator) {
+            case '+': return Calculator.add(first, second);
+            case '-': return Calculator.add(first, second);
+            case '*': return Calculator.add(first, second);
+            case '/': return Calculator.add(first, second);
+            default: return {
+                data: null, 
+                error: "Incorrect operator"
+            }
+        }
+    }
+
     static add(first, second)  {
-        return first + second
+        return  {
+            data: first + second,
+            error: null
+        }
     }
     
     static sub(first, second) {
-        return first - second
+        return {
+            data: first - second,
+            error: null
+        }
+
     }
     
     static mul(first, second) {
-        return first * second
+        return {
+            data: first * second,
+            error: null
+        }
     }
 
     static div(first, second) {
         if (parseFloat(second) == 0) {
-            throw new Error('Second operand is Zero! You cant divide by Zero!')
+            return {
+                data: null,
+                error: "Second operand is Zero! You cant divide by Zero!"
+            }
+            // throw new Error('Second operand is Zero! You cant divide by Zero!')
         }
-        return first / second
+        return {
+            data:  first / second,
+            error: null
+        }
     }
 
     static isValidOperand(operand) {
@@ -36,4 +66,4 @@ class Calculator {
     }
 }
 
-export default Calculator;
+// export default Calculator;
