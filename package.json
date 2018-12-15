@@ -1,0 +1,14 @@
+{
+  "name": "calculator-unit-test-app",
+  "version": "1.0.0",
+  "description": "Project for qa course (unit testing)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "HustonMmmavr",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": ""
+  }
+}
