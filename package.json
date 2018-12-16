@@ -4,11 +4,15 @@
   "description": "Project for qa course (unit testing)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha",
+    "test-with-cov": "nyc --report=text mocha"
   },
   "author": "HustonMmmavr",
   "license": "ISC",
   "dependencies": {
-    "mocha": ""
+    "babel": "^6.23.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   }
 }
