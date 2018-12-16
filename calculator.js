@@ -11,7 +11,7 @@ class Calculator {
         if (!Calculator.isValidOperand(second)) {
             return {
                 data: null,
-                error: "Incorrect second operator"
+                error: "Incorrect second operand"
             }
         }
 

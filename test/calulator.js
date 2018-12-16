@@ -76,47 +76,72 @@ describe('Operation mul: ', () => {
     })
 });
 
+
 describe('Operation div: ', () => {
-    it('Ok Sub two positive integers 2000 - 1999 = 1', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Ok Div two positive integers 3125 / 5 = 625', () => {
+        assert.deepEqual(calculator.div(3125, 5), {data: 625, error: null})
     })
 
-    it('Ok Sub positive and negative integers 8 - (-3) = 11', () => {
-        assert.deepEqual(calculator.sub(8, -3), {data: 11, error: null})
+    it('Ok Div positive and negative integers 8 / -1 = -8', () => {
+        assert.deepEqual(calculator.div(8, -1), {data: -8, error: null})
     })
 
-    it('Ok Sub integer and float 1 - 0.1654 = 0.8346', () => {
-        assert.deepEqual(calculator.sub(1, 0.1654), {data: 0.8346, error: null})
+    it('Ok Div two negative integers -8 / -2 = -4', () => {
+        assert.deepEqual(calculator.div(-8, -2), {data: 4, error: null})
     })
 
-    it('Ok Sub negative intger and negagtive float -1 - (-0.1654) = -0.8346', () => {
-        assert.deepEqual(calculator.sub(-1, -0.1654), {data: -0.8346, error: null})
+    it('Ok div zero by integer and float 0 / 2 = 0', () => {
+        assert.deepEqual(calculator.div(0, 2), {data: 0, error: null})
     })
 
-    it('Ok Sub zero and positive float: 0 - 3.1654 = 3.1654', () => {
-        assert.deepEqual(calculator.sub(0, 3.1654), {data: -3.1654, error: null})
+    it('Ok div positive integer and float 1 / 0.5 = 2', () => {
+        assert.deepEqual(calculator.div(1, 0.5), {data: 2, error: null})
+    })
+
+    it('Ok div positive integer and negative float 1 / -0.5 = -2', () => {
+        assert.deepEqual(calculator.div(1, -0.5), {data: -2, error: null})
+    })
+
+    it('Ok div two positive floats  1.5 / 0.5 = 3', () => {
+        assert.deepEqual(calculator.div(1.5, 0.5), {data: 3, error: null})
+    })
+
+    it('Ok div two negative floats -1.5 / -0.5 = 3', () => {
+        assert.deepEqual(calculator.div(-1.5, -0.5), {data: 3, error: null})
+    })
+
+    it('Err divide by zero (0): 8 / 0', () => {
+        assert.deepEqual(calculator.div(8, 0), {data: null, error: "Second operand is Zero! You cant divide by Zero!"})
+    })
+
+    it('Err divide by zero (0.0) float: 8 / 0', () => {
+        assert.deepEqual(calculator.div(8, 0.0), {data: null, error: "Second operand is Zero! You cant divide by Zero!"})
     })
 });
 
 describe('Operand validation: ', () => {
     it('Ok validate positive integer', () => {
-        assert.equal(calculator.sub(2000, 1999), {data: 1, error: null})
+        assert.equal(calculator.isValidOperand(15), true)
     })
     
     it('Ok validate negative integer', () => {
-        assert.equal(calculator.sub(2000, 1999), {data: 1, error: null})
+        assert.equal(calculator.isValidOperand(-5), true)
     })
 
     it('Ok validate positive float', () => {
-        assert.equal(calculator.sub(2000, 1999), {data: 1, error: null})
+        assert.equal(calculator.isValidOperand(1.1), true)
     })
     
     it('Ok validate negative float', () => {
-        assert.equal(calculator.sub(2000, 1999), {data: 1, error: null})
+        assert.equal(calculator.isValidOperand(-1.1), true)
     })
 
-    it('Ok validate 0', () => {
-        assert.equal(calculator.isValidOperand('0'), {data: 1, error: null})
+    it('Ok validate 0 from string', () => {
+        assert.equal(calculator.isValidOperand('0'), true)
+    })
+
+    it('Ok validate 0 from string', () => {
+        assert.equal(calculator.isValidOperand('0.0'), true)
     })
 
     it('Err Validate string \'sdfdds\': ', () => {
@@ -126,30 +151,42 @@ describe('Operand validation: ', () => {
     it('Err Validate string \'10e\': ', () => {
         assert.equal(calculator.isValidOperand('10e'),false)
     })
+
+    it('Err validate NaN: ', () => {
+        assert.equal(calculator.isValidOperand(NaN), false)
+    })
 })
 
 describe('Calculator method compute: ', () => {
-    it('Ok add two positive integers', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Ok add two positive integers 2000 + 1999 = 3999', () => {
+        assert.deepEqual(calculator.compute(2000, '+', 1999), {data: 3999, error: null})
     })
 
-    it('Ok sub two positive integers', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Ok sub two positive integers 2000 - 1999 = 1', () => {
+        assert.deepEqual(calculator.compute(2000, '-', 1999), {data: 1, error: null})
     })
 
-    it('Ok mul two positive integers', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Ok mul two positive integers 2000 * 1999 = 3998000', () => {
+        assert.deepEqual(calculator.compute(2000, '*', 1999), {data: 3998000, error: null})
     })
 
-    it('Ok div two positive integers', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Ok div two positive integers 2000 / 2 = 1000', () => {
+        assert.deepEqual(calculator.compute(2000, '/', 2), {data: 1000, error: null})
     })
 
-    it('Err: Division by zero 4 / 0: ', () => {
-        assert.deepEqual(calculator.sub(2000, 1999), {data: 1, error: null})
+    it('Err: Division by zero 2000 / 0: ', () => {
+        assert.deepEqual(calculator.compute(2000, '/', 0), {data: null, error: "Second operand is Zero! You cant divide by Zero!"})
     })
 
-    it('Err: Sended incorrect operand (a): ', () => {
+    it('Err: Sended incorrect first operand = \'sdfd\': ', () => {
+        assert.deepEqual(calculator.compute('sdfd', '+', 2), {data: null, error: "Incorrect first operand"})
+    })
 
+    it('Err: Sended incorrect second operand = Nan: ', () => {
+        assert.deepEqual(calculator.compute(2, '+', NaN), {data: null, error: "Incorrect second operand"})
+    })
+
+    it ('Err: Sended incorrect operator = \'a\'', () => {
+        assert.deepEqual(calculator.compute(2, 'a', 3), {data: null, error: "Incorrect operator"})
     })
 });
