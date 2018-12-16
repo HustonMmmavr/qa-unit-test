@@ -12,13 +12,12 @@
 
 <h2>Результаты тстирования</h2>
 <pre> 
-    <code>
-            Operation add:
-            ✓ Ok Add two positive integers 2 + 3 = 5
-            ✓ Ok Add  positive and negative integers 2 + (-3) = -1
-            ✓ Ok Add integer and float 2 + 3.1654 = 5.1654
-            ✓ Ok Add positive integer and negative float 2 + (-3.1654) = -1.1654
-            ✓ Ok add zero and positive float: 0 + 3.1654 = 3.1654
+        Operation add:
+        ✓ Ok Add two positive integers 2 + 3 = 5
+        ✓ Ok Add  positive and negative integers 2 + (-3) = -1
+        ✓ Ok Add integer and float 2 + 3.1654 = 5.1654
+        ✓ Ok Add positive integer and negative float 2 + (-3.1654) = -1.1654
+        ✓ Ok add zero and positive float: 0 + 3.1654 = 3.1654
 
         Operation sub:
             ✓ Ok Sub two positive integers 2000 - 1999 = 1
@@ -78,7 +77,6 @@
         All files      |      100 |      100 |      100 |      100 |                   |
         calculator.js |      100 |      100 |      100 |      100 |                   |
         ---------------|----------|----------|----------|----------|-------------------|
-    </code>
 </pre>
 
 
