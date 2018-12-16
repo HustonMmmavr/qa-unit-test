@@ -17,7 +17,7 @@ readerWriter.question("Input first operand: ", (first) => {
             if (res.error != null) {
                 console.log(res.error)
             } else {
-                console.log("Result of equation ", first, "+", second, " = ", res.data)
+                console.log("Result of equation ", first, operator, second, " = ", res.data)
             }
             readerWriter.close()
         });
